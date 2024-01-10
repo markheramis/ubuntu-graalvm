@@ -67,18 +67,20 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      # Build and push Docker image with Buildx
       # Set the tag based on branch name or use 'latest' for master
+      - name: Set Docker tag
+        id: set-tag
+        run: |
+          if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/master" ]; then
+            echo "TAG=latest" >> $GITHUB_ENV
+          else
+            echo "TAG=branch-$(echo "${{ github.ref }}" | sed 's|refs/heads/||')" >> $GITHUB_ENV
+          fi
+
+      # Build and push Docker image with Buildx
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
         id: build-and-push
-        run: |
-          if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/master" ]; then
-            TAG="latest"
-          else
-            TAG="branch-$(echo "${{ github.ref }}" | sed 's|refs/heads/||')"
-          fi
-          echo "TAG=${TAG}" >> $GITHUB_ENV
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
         with:
           context: .
@@ -87,6 +89,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
 
 
 
