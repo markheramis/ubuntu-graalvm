@@ -17,7 +17,7 @@ RUN rm graalvm-community-jdk-21.0.1_linux-x64_bin.tar.gz
 RUN mv graalvm-jdk-21/ /usr/lib/jvm/
 
 # Set the GRAALVM_HOME environment variable
-ENV GRAALVM_HOME /usr/lib/jvm/graalvm-jdk-21/
+ENV GRAALVM_HOME /usr/lib/jvm/graalvm-jdk-21
 
 # Add GraalVM binaries to the PATH
 ENV PATH $GRAALVM_HOME/bin:$PATH
