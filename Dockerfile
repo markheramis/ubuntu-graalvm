@@ -29,7 +29,7 @@ ENV JAVA_HOME $GRAALVM_HOME
 ENV PATH $JAVA_HOME/bin:$PATH
 
 # Display GraalVM version to verify installation
-# RUN java -version
+RUN java -version
 
 # Cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
