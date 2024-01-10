@@ -9,10 +9,10 @@ RUN apt-get update && \
     apt-get install -y wget
 
 # Download and install GraalVM
-RUN wget https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.1/graalvm-community-jdk-21.0.1_linux-x64_bin.tar.gz && \
-    mkdir graalvm-jdk-21 && \
-    tar -zxvf graalvm-community-jdk-21.0.1_linux-x64_bin.tar.gz -C graalvm-jdk-21 && \
-    rm graalvm-community-jdk-21.0.1_linux-x64_bin.tar.gz
+RUN wget https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.1/graalvm-community-jdk-21.0.1_linux-x64_bin.tar.gz
+RUN mkdir graalvm-jdk-21
+RUN tar -zxvf graalvm-community-jdk-21.0.1_linux-x64_bin.tar.gz -C graalvm-jdk-21
+RUN rm graalvm-community-jdk-21.0.1_linux-x64_bin.tar.gz
 
 RUN mv graalvm-jdk-21/ /usr/lib/jvm/
 
