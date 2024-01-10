@@ -28,11 +28,11 @@ ENV JAVA_HOME $GRAALVM_HOME
 # Update the PATH to include JAVA_HOME/bin
 ENV PATH $JAVA_HOME/bin:$PATH
 
-# Cleanup
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
 # Display GraalVM version to verify installation
 RUN java -version
+
+# Cleanup
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Your further instructions and application setup can go here
 
