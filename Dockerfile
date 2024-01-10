@@ -22,6 +22,12 @@ ENV GRAALVM_HOME /usr/lib/jvm/graalvm-jdk-21/
 # Add GraalVM binaries to the PATH
 ENV PATH $GRAALVM_HOME/bin:$PATH
 
+# Set the JAVA_HOME environment variable
+ENV JAVA_HOME $GRAALVM_HOME
+
+# Update the PATH to include JAVA_HOME/bin
+ENV PATH $JAVA_HOME/bin:$PATH
+
 # Cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
