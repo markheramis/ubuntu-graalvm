@@ -72,21 +72,15 @@ jobs:
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
         id: build-and-push
-        run: |
-          if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/master" ]; then
-            TAG="latest"
-          else
-            TAG="branch-$(echo "${{ github.ref }}" | sed 's|refs/heads/||')"
-          fi
-          echo "TAG=${TAG}" >> $GITHUB_ENV
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+          tags: ${{ if (github.event_name == 'push' && github.ref == 'refs/heads/master') }}latest{{ else }}${{ 'branch-' + replace(github.ref, 'refs/heads/', '') }}{{ endif }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
 
 
       # Sign the resulting Docker image digest except on PRs.
