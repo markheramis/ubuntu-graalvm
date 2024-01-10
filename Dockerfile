@@ -12,7 +12,7 @@ RUN apt-get update && \
 RUN wget https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.1/graalvm-community-jdk-21.0.1_linux-x64_bin.tar.gz && \
     mkdir graalvm-jdk-21 && \
     tar -zxvf graalvm-community-jdk-21.0.1_linux-x64_bin.tar.gz -C graalvm-jdk-21 && \
-    rm graalvm-jdk-21_linux-x64_bin.tar.gz
+    rm graalvm-community-jdk-21.0.1_linux-x64_bin.tar.gz
 
 RUN mv graalvm-jdk-21/ /usr/lib/jvm/
 
