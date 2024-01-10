@@ -14,7 +14,7 @@ RUN mkdir graalvm-jdk-21
 RUN tar -zxvf graalvm-community-jdk-21.0.1_linux-x64_bin.tar.gz -C graalvm-jdk-21 --strip-components=1
 RUN rm graalvm-community-jdk-21.0.1_linux-x64_bin.tar.gz
 
-RUN mv graalvm-jdk-21/ /usr/lib/jvm/
+RUN mv graalvm-jdk-21/ /usr/lib/jvm/graalvm-jdk-21
 
 # Set the GRAALVM_HOME environment variable
 ENV GRAALVM_HOME /usr/lib/jvm/graalvm-jdk-21
